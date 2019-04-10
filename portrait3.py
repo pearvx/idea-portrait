@@ -27,7 +27,11 @@ while True:
          xmax = xmin + 40
          ymin = y
          ymax = ymin + 40
-         roi_corners = np.array([[(xmin, ymin), (xmax, ymin), (xmax, ymax), (xmin, ymax)]], dtype=np.int32)
+         xmin_body = xmin - width
+         xmax_body = xmax + width
+         ymin_body = ymin
+         ymax_body = height
+         roi_corners = np.array([[(xmin, ymin), (xmax, ymin), (xmax, ymax), (xmin, ymax)], [(xmin_body, ymin_body), (xmax_body, ymin_body), (xmax_body, ymax_body), (xmin_body, ymax_body)]], dtype=np.int32)
          cv2.fillPoly(mask, roi_corners, color)
          # cv2.rectangle(frame, (x, y),(x+w, y+h),(255, 0, 0), 2)
      cv2.imshow(window_name, mask)

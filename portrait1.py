@@ -25,9 +25,16 @@ while True:
          ypadding = int((h / 8))
          ymin = y - ypadding
          ymax = ymin + h
+         bodyYmax = int(height)
+         bodyXmin = x - w
          face_img = frame[ymin:y+h+ypadding, x:x+w]
+         body_img = frame[ymax:bodyYmax, bodyXmin:x+w+w]
          blurred_face_img = cv2.GaussianBlur(face_img,(53, 53), 100)
-         frame[ymin:ymin + blurred_face_img.shape[0], x:x+blurred_face_img.shape[1]] = blurred_face_img
+         blurred_body_img = cv2.GaussianBlur(body_img,(53, 53), 100)
+         if len(blurred_face_img) > 0:
+             frame[ymin:ymin + blurred_face_img.shape[0], x:x+blurred_face_img.shape[1]] = blurred_face_img
+         if len(blurred_body_img) > 0:
+             frame[ymax:ymax + blurred_body_img.shape[0], bodyXmin:bodyXmin+blurred_body_img.shape[1]] = blurred_body_img
      cv2.imshow(window_name, frame)
   rval, frame = vc.read()
 
