@@ -1,6 +1,10 @@
 import numpy as np
 import cv2
 
+def titleAndSubtitle(title, subtitle, x, y):
+    cv2.putText(frame, title, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
+    cv2.putText(frame, subtitle, (x, y + 25), cv2.FONT_HERSHEY_SIMPLEX, 0.45, color, 2)
+
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 window_name = "portrait0"
 cv2.namedWindow(window_name)
@@ -30,18 +34,18 @@ while True:
          textYPadding = 75
          if xTextMin > 0:
              birthdateY = ymin + 30
-             cv2.putText(frame, "Birthdate", (xTextMin, birthdateY), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
+             titleAndSubtitle("10/4/1973", "Birthdate", xTextMin, birthdateY)
              genderY = birthdateY + textYPadding
-             cv2.putText(frame, "Gender", (xTextMin, genderY), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
+             titleAndSubtitle("Female", "Gender", xTextMin, genderY)
              ageY = genderY + textYPadding
-             cv2.putText(frame, "Age", (xTextMin, ageY), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
+             titleAndSubtitle("37", "Age", xTextMin, ageY)
          if xTextMax < width - 150:
              incomeY = ymin + 30
-             cv2.putText(frame, "Income", (xTextMax, incomeY), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
+             titleAndSubtitle("$54,000", "Income", xTextMax, incomeY)
              phoneNumberY = incomeY + textYPadding
-             cv2.putText(frame, "Phone Number", (xTextMax, phoneNumberY), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
+             titleAndSubtitle("312-229-9605", "Phone Number", xTextMax, phoneNumberY)
              heightY = phoneNumberY + textYPadding
-             cv2.putText(frame, "Height", (xTextMax, ageY), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
+             titleAndSubtitle("5' 86'", "Height", xTextMax, heightY)
          # cv2.putText(frame, "Birthdate", (xTextMin, ymin), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
      cv2.imshow(window_name, frame)
   rval, frame = vc.read()
@@ -51,4 +55,3 @@ while True:
 
 vc.release()
 cv2.destroyAllWindows()
-
