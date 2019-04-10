@@ -5,7 +5,7 @@ face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 window_name = "portrait2"
 cv2.namedWindow(window_name)
 vc = cv2.VideoCapture(0)
-color = (255 , 0, 153)
+color = (51 , 255, 255)
 
 width = vc.get(cv2.CAP_PROP_FRAME_WIDTH)   # float
 height = vc.get(cv2.CAP_PROP_FRAME_HEIGHT)
@@ -21,9 +21,9 @@ while True:
      faces = face_cascade.detectMultiScale(gray, 1.3, 5)
      for (x, y, w, h) in faces:
          xmin = x
-         xmax = x + w
+         xmax = xmin + w
          ymin = y
-         ymax = y + h
+         ymax = ymin + h
          roi_corners = np.array([[(xmin, ymin), (xmax, ymin), (xmax, ymax), (xmin, ymax)]], dtype=np.int32)
          cv2.fillPoly(frame, roi_corners, color)
          # cv2.rectangle(frame, (x, y),(x+w, y+h),(255, 0, 0), 2)
