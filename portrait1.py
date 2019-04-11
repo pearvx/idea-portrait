@@ -31,9 +31,9 @@ while True:
          body_img = frame[ymax:bodyYmax, bodyXmin:x+w+w]
          blurred_face_img = cv2.GaussianBlur(face_img,(53, 53), 100)
          blurred_body_img = cv2.GaussianBlur(body_img,(53, 53), 100)
-         if len(blurred_face_img) > 0:
+         if blurred_face_img is not None:
              frame[ymin:ymin + blurred_face_img.shape[0], x:x+blurred_face_img.shape[1]] = blurred_face_img
-         if len(blurred_body_img) > 0:
+         if blurred_body_img is not None:
              frame[ymax:ymax + blurred_body_img.shape[0], bodyXmin:bodyXmin+blurred_body_img.shape[1]] = blurred_body_img
      cv2.imshow(window_name, frame)
   rval, frame = vc.read()
