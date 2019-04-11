@@ -7,6 +7,9 @@ cv2.namedWindow(window_name)
 vc = cv2.VideoCapture(0)
 color = (0, 255, 0)
 
+def title(frame, title, x, y):
+    cv2.putText(frame, title, (int(x), int(y)), cv2.FONT_HERSHEY_SIMPLEX, 0.75, color, 2)
+
 width = vc.get(cv2.CAP_PROP_FRAME_WIDTH)   # float
 height = vc.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
@@ -17,8 +20,6 @@ mask = np.ones(frame.shape, dtype=np.uint8)
 while True:
 
   if frame is not None:
-     # cv2.fillPoly(frame, roi_corners, color)
-     # cv2.GaussianBlur(frame(xmin), frame(roi_corners), (0, 0), 4)
      mask.fill(0)
      gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
      faces = face_cascade.detectMultiScale(gray, 1.3, 5)
@@ -27,13 +28,10 @@ while True:
          xmax = xmin + 40
          ymin = y
          ymax = ymin + 40
-         xmin_body = xmin - width
-         xmax_body = xmax + width
-         ymin_body = ymin
-         ymax_body = height
-         roi_corners = np.array([[(xmin, ymin), (xmax, ymin), (xmax, ymax), (xmin, ymax)], [(xmin_body, ymin_body), (xmax_body, ymin_body), (xmax_body, ymax_body), (xmin_body, ymax_body)]], dtype=np.int32)
+         xTextMin = xmin - 15
+         title(mask, "Human", xTextMin, ymin - 30)
+         roi_corners = np.array([[(xmin, ymin), (xmax, ymin), (xmax, ymax), (xmin, ymax)]], dtype=np.int32)
          cv2.fillPoly(mask, roi_corners, color)
-         # cv2.rectangle(frame, (x, y),(x+w, y+h),(255, 0, 0), 2)
      cv2.imshow(window_name, mask)
   rval, frame = vc.read()
 
