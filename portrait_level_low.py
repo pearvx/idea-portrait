@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 
-COLOR = (0, 255, 0)
+COLOR = (238, 238, 34)
 WINDOW_NAME = "portrait3"
 MODEL_PATH = "haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(MODEL_PATH)
