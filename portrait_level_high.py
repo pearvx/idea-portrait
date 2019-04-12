@@ -3,6 +3,7 @@ import cv2
 from button import button_pressed
 
 COLOR = (22 , 231, 248)
+RESIZED = (1920, 1200)
 WINDOW_NAME = "portrait0"
 MODEL_PATH = "haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(MODEL_PATH)
@@ -52,7 +53,8 @@ def runPortrait():
                  titleAndSubtitle(frame, "312-229-9605", "Phone Number", xTextMax, phoneNumberY)
                  heightY = phoneNumberY + textYPadding
                  titleAndSubtitle(frame, "5' 86'", "Height", xTextMax, heightY)
-         cv2.imshow(WINDOW_NAME, frame)
+         resize = cv2.resize(frame, RESIZED)
+         cv2.imshow(WINDOW_NAME, resize)
       rval, frame = video_capture.read()
 
       if cv2.waitKey(1) & 0xFF == ord('q'):

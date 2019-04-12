@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 
 COLOR = (185 , 0, 236)
+RESIZED = (1920, 1200)
 WINDOW_NAME = "portrait1"
 MODEL_PATH = "haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(MODEL_PATH)
@@ -43,7 +44,8 @@ def runPortrait():
                  titleAndSubtitle(frame, "5' 7\"", "Height", xTextMin, ymax - 30)
              if blurred_body_img is not None:
                  frame[ymax:ymax + blurred_body_img.shape[0], bodyXmin:bodyXmin+blurred_body_img.shape[1]] = blurred_body_img
-         cv2.imshow(WINDOW_NAME, frame)
+         resize = cv2.resize(frame, RESIZED)
+         cv2.imshow(WINDOW_NAME, resize)
       rval, frame = video_capture.read()
 
       if cv2.waitKey(1) & 0xFF == ord('q'):

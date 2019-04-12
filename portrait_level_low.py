@@ -2,6 +2,7 @@ import numpy as np
 import cv2
 
 COLOR = (238, 238, 34)
+RESIZED = (1920, 1200)
 WINDOW_NAME = "portrait3"
 MODEL_PATH = "haarcascade_frontalface_default.xml"
 face_cascade = cv2.CascadeClassifier(MODEL_PATH)
@@ -34,7 +35,8 @@ def runPortrait():
              title(mask, "Human", xTextMin, ymin - 30)
              roi_corners = np.array([[(xmin, ymin), (xmax, ymin), (xmax, ymax), (xmin, ymax)]], dtype=np.int32)
              cv2.fillPoly(mask, roi_corners, COLOR)
-         cv2.imshow(WINDOW_NAME, mask)
+         resize = cv2.resize(mask, RESIZED)
+         cv2.imshow(WINDOW_NAME, resize)
       rval, frame = video_capture.read()
 
       if cv2.waitKey(1) & 0xFF == ord('q'):
