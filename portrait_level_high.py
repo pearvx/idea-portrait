@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 
+RESIZED = (1200, 1920)
 COLOR = (51 , 255, 255)
 WINDOW_NAME = "portrait0"
 MODEL_PATH = "haarcascade_frontalface_default.xml"
@@ -51,7 +52,8 @@ def runPortrait():
                  titleAndSubtitle(frame, "312-229-9605", "Phone Number", xTextMax, phoneNumberY)
                  heightY = phoneNumberY + textYPadding
                  titleAndSubtitle(frame, "5' 86'", "Height", xTextMax, heightY)
-         cv2.imshow(WINDOW_NAME, frame)
+         resize = cv2.resize(frame, RESIZED)
+         cv2.imshow(WINDOW_NAME, resize)
       rval, frame = video_capture.read()
 
       if cv2.waitKey(1) & 0xFF == ord('q'):
